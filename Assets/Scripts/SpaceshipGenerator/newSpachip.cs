@@ -45,8 +45,9 @@ namespace SpaceshipGenerator
 
 
             Vector3 ZU = new Vector3(0, 0, -0.3f);
-            Vector3 BU = new Vector3(0.4f, 0, -0.3f);
             Vector3 CU = new Vector3(0, -0.75f, -0.3f);
+            
+            Vector3 BU = new Vector3(0.4f, 0, -0.3f);
             Vector3 EU = new Vector3(-0.4f, 0, -0.3f);
 
             
@@ -228,6 +229,8 @@ namespace SpaceshipGenerator
                 A,B,C,E,
                 //70
                 BU,CU,EU,ZU,
+                //74,75
+                BU,EU,
                 
                 //Connections points upper right
                 //
@@ -442,17 +445,24 @@ namespace SpaceshipGenerator
                 //Cockpit
                 
                 70,2,1,
-                72,66,69,
+                72,1,32,
+                74,1,75,
+
+                // 3,2,70,
+                // 3,32,72,
+                // 3,72,70
 
                 
-                70,67,66,
-                72,66,69,
+                // 70,67,66,
+                // 72,66,69,
+                //
+                //
+                // 70,66,72,
                 
-                
-                70,66,72,
                 68,67,70,
                 68,69,72,
-                68,72,70,
+                // 68,72,70,
+                68,75,74
                 
 
             };
