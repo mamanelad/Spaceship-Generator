@@ -266,6 +266,8 @@ namespace SpaceshipGenerator
             var triangles = new[]
             {
   
+               
+                
                  //up
                  //kite-shape
                  3, 1, 2,
