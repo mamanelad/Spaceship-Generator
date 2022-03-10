@@ -44,10 +44,11 @@ namespace SpaceshipGenerator
             Vector3 E = new Vector3(-0.4f, 0, 0);
 
 
+            Vector3 ZU = new Vector3(0, 0, -0.3f);
+            Vector3 BU = new Vector3(0.4f, 0, -0.3f);
+            Vector3 CU = new Vector3(0, -0.75f, -0.3f);
+            Vector3 EU = new Vector3(-0.4f, 0, -0.3f);
 
-            // Vector3 BU = new Vector3(0.4f, 0, -0.2f);
-            // Vector3 CU = new Vector3(0, -0.75f, -0.2f);
-            // Vector3 EU = new Vector3(-0.4f, 0, -0.2f);
             
             
 
@@ -223,6 +224,11 @@ namespace SpaceshipGenerator
                 //65
                 EB,
                 
+                //66
+                A,B,C,E,
+                //70
+                BU,CU,EU,ZU,
+                
                 //Connections points upper right
                 //
                 CURa, CURb, CURc, CURz,
@@ -248,6 +254,8 @@ namespace SpaceshipGenerator
                 CLLa, CLLb, CLLc, CLLz, CLLe,
                 //
                 CLL1, CLL2, CLL3, CLL4, CLL5, CLL6, CLL7, CLL8, CLL9, CLL10, CLL11, CLL12, CLL13, CLL14
+                
+                
 
                 
             };
@@ -428,10 +436,19 @@ namespace SpaceshipGenerator
 
                 points.IndexOf(CUL1), points.IndexOf(CLL1), points.IndexOf(CULc),
                 points.IndexOf(CLL1), points.IndexOf(CLLc), points.IndexOf(CULc),
+                
+                //Cockpit
+                70,67,66,
+                72,66,69,
+                70,66,72,
+                68,67,70,
+                68,69,72,
+                68,72,70,
+                
 
             };
 
-            FlipTriangles(triangles, 276, triangles.Length - 1);
+            FlipTriangles(triangles, 276, triangles.Length - 7);
 
             var a = 0;
             
