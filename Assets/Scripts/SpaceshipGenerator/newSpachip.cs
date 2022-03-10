@@ -440,8 +440,15 @@ namespace SpaceshipGenerator
                 points.IndexOf(CLL1), points.IndexOf(CLLc), points.IndexOf(CULc),
                 
                 //Cockpit
+                
+                70,2,1,
+                72,66,69,
+
+                
                 70,67,66,
                 72,66,69,
+                
+                
                 70,66,72,
                 68,67,70,
                 68,69,72,
@@ -537,7 +544,11 @@ namespace SpaceshipGenerator
             //     ClampToRadius(points, MAX_RADIUS);
             // }
             //
-            
+
+            for (int i = 0; i < points.Count; i++)
+            {
+                points[i] = points[i].RotateInDegreesAroundX(90);
+            }
             mesh.SetPoints(points.ToArray(), triangles);
             //
             // mesh.Mesh.uv = uvs.ToArray();
