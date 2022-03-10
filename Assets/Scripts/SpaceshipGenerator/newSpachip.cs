@@ -22,14 +22,14 @@ namespace SpaceshipGenerator
         {
             if (topSizeRange.Min < MIN_SIZE)
             {
-                Debug.LogError($"Size must be greater than {MIN_SIZE}");
+                // Debug.LogError($"Size must be greater than {MIN_SIZE}");
                 topSizeRange.Min = MIN_SIZE;
                 topSizeRange.Max = Mathf.Max(topSizeRange.Max, MIN_SIZE);
             }
 
             if (sidesSizeRange.Min < MIN_SIZE)
             {
-                Debug.LogError($"Size must be greater than {MIN_SIZE}");
+                // Debug.LogError($"Size must be greater than {MIN_SIZE}");
                 sidesSizeRange.Min = MIN_SIZE;
                 sidesSizeRange.Max = Mathf.Max(sidesSizeRange.Max, MIN_SIZE);
             }
@@ -44,10 +44,11 @@ namespace SpaceshipGenerator
             Vector3 E = new Vector3(-0.4f, 0, 0);
 
 
+            Vector3 ZU = new Vector3(0, 0, -0.3f);
+            Vector3 BU = new Vector3(0.4f, 0, -0.3f);
+            Vector3 CU = new Vector3(0, -0.75f, -0.3f);
+            Vector3 EU = new Vector3(-0.4f, 0, -0.3f);
 
-            // Vector3 BU = new Vector3(0.4f, 0, -0.2f);
-            // Vector3 CU = new Vector3(0, -0.75f, -0.2f);
-            // Vector3 EU = new Vector3(-0.4f, 0, -0.2f);
             
             
 
@@ -122,8 +123,88 @@ namespace SpaceshipGenerator
             Vector3 L12B = temp0Vector3.RotateInDegreesAroundZ(-120);
             Vector3 L13B = temp0Vector3.RotateInDegreesAroundZ(-130);
             Vector3 L14B = temp0Vector3.RotateInDegreesAroundZ(-140);
-
             
+            //Connection Upper Right + "point name"
+            Vector3 CURz = Z;
+            Vector3 CURa = A;
+            Vector3 CURb = B;
+            Vector3 CURc = C;
+            Vector3 CUR1 = R1;
+            Vector3 CUR2 = R2;
+            Vector3 CUR3 = R3;
+            Vector3 CUR4 = R4;
+            Vector3 CUR5 = R5;
+            Vector3 CUR6 = R6;
+            Vector3 CUR7 = R7;
+            Vector3 CUR8 = R8;
+            Vector3 CUR9 = R9;
+            Vector3 CUR10 = R10;
+            Vector3 CUR11 = R11;
+            Vector3 CUR12 = R12;
+            Vector3 CUR13 = R13;
+            Vector3 CUR14 = R14;
+
+            //Connection Lower Right + "point name"
+            Vector3 CLRz = ZB;
+            Vector3 CLRa = AB;
+            Vector3 CLRb = BB;
+            Vector3 CLRc = CB;
+            Vector3 CLR1 = R1B;
+            Vector3 CLR2 = R2B;
+            Vector3 CLR3 = R3B;
+            Vector3 CLR4 = R4B;
+            Vector3 CLR5 = R5B;
+            Vector3 CLR6 = R6B;
+            Vector3 CLR7 = R7B;
+            Vector3 CLR8 = R8B;
+            Vector3 CLR9 = R9B;
+            Vector3 CLR10 = R10B;
+            Vector3 CLR11 = R11B;
+            Vector3 CLR12 = R12B;
+            Vector3 CLR13 = R13B;
+            Vector3 CLR14 = R14B;
+
+            //Connection Upper Left + "point name"
+            Vector3 CULz = Z;
+            Vector3 CULa = A;
+            Vector3 CULb = B;
+            Vector3 CULc = C;
+            Vector3 CULe = E;
+            Vector3 CUL1 = L1;
+            Vector3 CUL2 = L2;
+            Vector3 CUL3 = L3;
+            Vector3 CUL4 = L4;
+            Vector3 CUL5 = L5;
+            Vector3 CUL6 = L6;
+            Vector3 CUL7 = L7;
+            Vector3 CUL8 = L8;
+            Vector3 CUL9 = L9;
+            Vector3 CUL10 = L10;
+            Vector3 CUL11 = L11;
+            Vector3 CUL12 = L12;
+            Vector3 CUL13 = L13;
+            Vector3 CUL14 = L14;
+
+            //Connection Lower LEFT + "point name"
+            Vector3 CLLz = ZB;
+            Vector3 CLLa = AB;
+            Vector3 CLLb = BB;
+            Vector3 CLLc = CB;
+            Vector3 CLLe = EB;
+            Vector3 CLL1 = L1B;
+            Vector3 CLL2 = L2B;
+            Vector3 CLL3 = L3B;
+            Vector3 CLL4 = L4B;
+            Vector3 CLL5 = L5B;
+            Vector3 CLL6 = L6B;
+            Vector3 CLL7 = L7B;
+            Vector3 CLL8 = L8B;
+            Vector3 CLL9 = L9B;
+            Vector3 CLL10 = L10B;
+            Vector3 CLL11 = L11B;
+            Vector3 CLL12 = L12B;
+            Vector3 CLL13 = L13B;
+            Vector3 CLL14 = L14B;
             
             var points = new List<Vector3>(100)
             {
@@ -143,23 +224,50 @@ namespace SpaceshipGenerator
                 //65
                 EB,
                 
-                // //66
-                // A,B,C,E,
-                // //69
-                // BU,CU,EU
+                //66
+                A,B,C,E,
+                //70
+                BU,CU,EU,ZU,
+                
+                //Connections points upper right
+                //
+                CURa, CURb, CURc, CURz,
+                //
+                CUR1, CUR2, CUR3, CUR4, CUR5, CUR6, CUR7, CUR8, CUR9, CUR10, CUR11, CUR12, CUR13, CUR14,
+
+
+                //Connections points lower right
+                //
+                CLRa, CLRb, CLRc, CLRz,
+                //
+                CLR1, CLR2, CLR3, CLR4, CLR5, CLR6, CLR7, CLR8, CLR9, CLR10, CLR11, CLR12, CLR13, CLR14,
+
+                //Connections points upper LEFT
+                //
+                CULa, CULb, CULc, CULz, CULe,
+                //
+                CUL1, CUL2, CUL3, CUL4, CUL5, CUL6, CUL7, CUL8, CUL9, CUL10, CUL11, CUL12, CUL13, CUL14,
+
+
+                //Connections points lower LEFT
+                //
+                CLLa, CLLb, CLLc, CLLz, CLLe,
+                //
+                CLL1, CLL2, CLL3, CLL4, CLL5, CLL6, CLL7, CLL8, CLL9, CLL10, CLL11, CLL12, CLL13, CLL14
+                
+                
+
                 
             };
 
 
-            // for (int i = 0; i < points.Count; i++)
-            // {
-            //     points[i] = points[i].RotateInDegreesAroundX(90);
-            // }
-            
+         
 
             var triangles = new[]
             {
   
+               
+                
                  //up
                  //kite-shape
                  3, 1, 2,
@@ -232,10 +340,119 @@ namespace SpaceshipGenerator
                 63, 62, 65,
                 64, 63, 65,
                 
+                //connections
+                points.IndexOf(CURa), points.IndexOf(CLRa), points.IndexOf(CLRb),
+                points.IndexOf(CURa), points.IndexOf(CLRb), points.IndexOf(CURb),
+
+                points.IndexOf(CURb), points.IndexOf(CLRb), points.IndexOf(CUR14),
+                points.IndexOf(CUR14), points.IndexOf(CLRb), points.IndexOf(CLR14),
+
+                points.IndexOf(CUR13), points.IndexOf(CUR14), points.IndexOf(CLR14),
+                points.IndexOf(CUR13), points.IndexOf(CLR14), points.IndexOf(CLR13),
+
+                points.IndexOf(CUR12), points.IndexOf(CUR13), points.IndexOf(CLR13),
+                points.IndexOf(CUR12), points.IndexOf(CLR13), points.IndexOf(CLR12),
+
+                points.IndexOf(CUR11), points.IndexOf(CUR12), points.IndexOf(CLR12),
+                points.IndexOf(CUR11), points.IndexOf(CLR12), points.IndexOf(CLR11),
+
+                points.IndexOf(CUR10), points.IndexOf(CUR11), points.IndexOf(CLR11),
+                points.IndexOf(CUR10), points.IndexOf(CLR11), points.IndexOf(CLR10),
+
+                points.IndexOf(CUR9), points.IndexOf(CUR10), points.IndexOf(CLR10),
+                points.IndexOf(CUR9), points.IndexOf(CLR10), points.IndexOf(CLR9),
+
+                points.IndexOf(CUR8), points.IndexOf(CUR9), points.IndexOf(CLR9),
+                points.IndexOf(CUR8), points.IndexOf(CLR9), points.IndexOf(CLR8),
+
+                points.IndexOf(CUR7), points.IndexOf(CUR8), points.IndexOf(CLR8),
+                points.IndexOf(CUR7), points.IndexOf(CLR8), points.IndexOf(CLR7),
+
+                points.IndexOf(CUR6), points.IndexOf(CUR7), points.IndexOf(CLR7),
+                points.IndexOf(CUR6), points.IndexOf(CLR7), points.IndexOf(CLR6),
+
+                points.IndexOf(CUR5), points.IndexOf(CUR6), points.IndexOf(CLR6),
+                points.IndexOf(CUR5), points.IndexOf(CLR6), points.IndexOf(CLR5),
+
+                points.IndexOf(CUR4), points.IndexOf(CUR5), points.IndexOf(CLR5),
+                points.IndexOf(CUR4), points.IndexOf(CLR5), points.IndexOf(CLR4),
+
+                points.IndexOf(CUR3), points.IndexOf(CUR4), points.IndexOf(CLR4),
+                points.IndexOf(CUR3), points.IndexOf(CLR4), points.IndexOf(CLR3),
+
+                points.IndexOf(CUR2), points.IndexOf(CUR3), points.IndexOf(CLR3),
+                points.IndexOf(CUR2), points.IndexOf(CLR3), points.IndexOf(CLR2),
+
+                points.IndexOf(CUR1), points.IndexOf(CUR2), points.IndexOf(CLR2),
+                points.IndexOf(CUR1), points.IndexOf(CLR2), points.IndexOf(CLR1),
+
+                points.IndexOf(CUR1), points.IndexOf(CLR1), points.IndexOf(CURc),
+                points.IndexOf(CLR1), points.IndexOf(CLRc), points.IndexOf(CURc),
+
+                 //left
+                //321?
+                points.IndexOf(CULa), points.IndexOf(CLLa), points.IndexOf(CLLe),
+                points.IndexOf(CULa), points.IndexOf(CLLe), points.IndexOf(CULe),
+
+                points.IndexOf(CULe), points.IndexOf(CLLe), points.IndexOf(CUL14),
+                points.IndexOf(CUL14), points.IndexOf(CLLe), points.IndexOf(CLL14),
+
+                points.IndexOf(CUL13), points.IndexOf(CUL14), points.IndexOf(CLL14),
+                points.IndexOf(CUL13), points.IndexOf(CLL14), points.IndexOf(CLL13),
+
+                points.IndexOf(CUL12), points.IndexOf(CUL13), points.IndexOf(CLL13),
+                points.IndexOf(CUL12), points.IndexOf(CLL13), points.IndexOf(CLL12),
+
+                points.IndexOf(CUL11), points.IndexOf(CUL12), points.IndexOf(CLL12),
+                points.IndexOf(CUL11), points.IndexOf(CLL12), points.IndexOf(CLL11),
+
+                points.IndexOf(CUL10), points.IndexOf(CUL11), points.IndexOf(CLL11),
+                points.IndexOf(CUL10), points.IndexOf(CLL11), points.IndexOf(CLL10),
+
+                points.IndexOf(CUL9), points.IndexOf(CUL10), points.IndexOf(CLL10),
+                points.IndexOf(CUL9), points.IndexOf(CLL10), points.IndexOf(CLL9),
+
+                points.IndexOf(CUL8), points.IndexOf(CUL9), points.IndexOf(CLL9),
+                points.IndexOf(CUL8), points.IndexOf(CLL9), points.IndexOf(CLL8),
+
+                points.IndexOf(CUL7), points.IndexOf(CUL8), points.IndexOf(CLL8),
+                points.IndexOf(CUL7), points.IndexOf(CLL8), points.IndexOf(CLL7),
+
+                points.IndexOf(CUL6), points.IndexOf(CUL7), points.IndexOf(CLL7),
+                points.IndexOf(CUL6), points.IndexOf(CLL7), points.IndexOf(CLL6),
+
+                points.IndexOf(CUL5), points.IndexOf(CUL6), points.IndexOf(CLL6),
+                points.IndexOf(CUL5), points.IndexOf(CLL6), points.IndexOf(CLL5),
+
+                points.IndexOf(CUL4), points.IndexOf(CUL5), points.IndexOf(CLL5),
+                points.IndexOf(CUL4), points.IndexOf(CLL5), points.IndexOf(CLL4),
+
+                points.IndexOf(CUL3), points.IndexOf(CUL4), points.IndexOf(CLL4),
+                points.IndexOf(CUL3), points.IndexOf(CLL4), points.IndexOf(CLL3),
+
+                points.IndexOf(CUL2), points.IndexOf(CUL3), points.IndexOf(CLL3),
+                points.IndexOf(CUL2), points.IndexOf(CLL3), points.IndexOf(CLL2),
+
+                points.IndexOf(CUL1), points.IndexOf(CUL2), points.IndexOf(CLL2),
+                points.IndexOf(CUL1), points.IndexOf(CLL2), points.IndexOf(CLL1),
+
+                points.IndexOf(CUL1), points.IndexOf(CLL1), points.IndexOf(CULc),
+                points.IndexOf(CLL1), points.IndexOf(CLLc), points.IndexOf(CULc),
+                
+                //Cockpit
+                70,67,66,
+                72,66,69,
+                70,66,72,
+                68,67,70,
+                68,69,72,
+                68,72,70,
+                
+
             };
-            
-            
-            
+
+            FlipTriangles(triangles, 276, triangles.Length - 7);
+
+            var a = 0;
             
             
             
