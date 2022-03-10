@@ -260,8 +260,68 @@ namespace SpaceshipGenerator
                 
             };
 
+            var uvs = new List<Vector2>();
+            addDiscFaceUvs(uvs); //add front face 0-32
+            addDiscFaceUvs(uvs); //add back face 33- 65
+            
+            
+            //cockpit
+            //A-E 66-69
+            uvs.Add(new Vector2(.5f,1));//A
+            uvs.Add(new Vector2(.7f,1));//B
+            uvs.Add(new Vector2(.5f,0));//C
+            uvs.Add(new Vector2(.5f,0));//E
+            
+            //BU - ZU 70 - 73
+            uvs.Add(new Vector2(.7f,.5f));//BU
+            uvs.Add(new Vector2(.5f,.1f));//CU ??
+            uvs.Add(new Vector2(.5f,.5f));//EU
+            uvs.Add(new Vector2(.5f,0));//ZU ??
 
-         
+            
+            //connections - right
+            addRightConnectionsUvs(uvs);
+            
+            //connections -left
+            uvs.Add(new Vector2(.8f, .2f)); // CURa
+            uvs.Add(new Vector2(1, .2f)); // CURb
+            uvs.Add(new Vector2(.8f, .2f)); // CURc
+            uvs.Add(new Vector2(1, .4f)); // CURz
+            uvs.Add(new Vector2(1, .5f)); // CURe
+
+
+            for (int i = 1; i < 15; i++) // uppers right
+            {
+                if (i % 2 == 0)
+                {
+                    uvs.Add(new Vector2(.8f, .2f)); //LIKE CURa
+                }
+                else // like CURB
+                {
+                    uvs.Add(new Vector2(1, .2f)); //LIKE CURb
+                }
+            }
+
+            uvs.Add(new Vector2(.8f, 0)); // CLRa
+            uvs.Add(new Vector2(1, 0)); // CLRb
+            uvs.Add(new Vector2(.8f, 0)); // CLRc
+            uvs.Add(new Vector2(1, 0)); // CLRz
+            uvs.Add(new Vector2(1, 0)); // CLRe
+
+
+            for (int i = 1; i < 15; i++) // lowers right
+            {
+                if (i % 2 == 0)
+                {
+                    uvs.Add(new Vector2(.8f, .2f)); //LIKE CLRa
+                }
+                else // like CURB
+                {
+                    uvs.Add(new Vector2(1, .2f)); //LIKE CLRb
+                }
+            }
+            
+
 
             var triangles = new[]
             {
@@ -440,8 +500,15 @@ namespace SpaceshipGenerator
                 points.IndexOf(CLL1), points.IndexOf(CLLc), points.IndexOf(CULc),
                 
                 //Cockpit
+                
+                70,2,1,
+                72,66,69,
+
+                
                 70,67,66,
                 72,66,69,
+                
+                
                 70,66,72,
                 68,67,70,
                 68,69,72,
@@ -452,95 +519,95 @@ namespace SpaceshipGenerator
 
             FlipTriangles(triangles, 276, triangles.Length - 7);
 
-            var a = 0;
             
             
             
             
             
-            // var topHalfSize = topSizeRange.RandomInside() / 2;
-            // var sidesHalfSize = sidesSizeRange.RandomInside() / 2;
-            //
-            // // The first face.
-            // const int POINTS_COUNT = 4 * 2 + 4 * 2 * 2;
-            // var points = new List<Vector3>(POINTS_COUNT) {
-            //     new Vector3(sidesHalfSize, topHalfSize, -MAX_RADIUS),
-            //     new Vector3(sidesHalfSize, -topHalfSize, -MAX_RADIUS),
-            //     new Vector3(-sidesHalfSize, -topHalfSize, -MAX_RADIUS),
-            //     new Vector3(-sidesHalfSize, topHalfSize, -MAX_RADIUS),
-            // };
-            // var uvs = new List<Vector2>(POINTS_COUNT) {
-            //     new Vector2(1f, 0.25f),
-            //     new Vector2(1f, 0f),
-            //     new Vector2(0.75f, 0f),
-            //     new Vector2(0.75f, 0.25f),
-            // };
-            //
-            // // Duplicate the first face and split its vertices so they can create
-            // // hard edges.
-            // points.Add(points[0]);
-            // uvs.Add(new Vector2(0f, 0.25f));
-            // for (int i = 1; i < 4; i++) {
-            //     points.Add(points[i]);
-            //     points.Add(points[i]);
-            //     var uv = new Vector2(0.25f * i, 0.25f);
-            //     uvs.Add(uv);
-            //     uvs.Add(uv);
-            // }
-            // points.Add(points[0]);
-            // uvs.Add(new Vector2(1f, 0.25f));
-            //
-            // // Create the other end of the top and side faces.
-            // for (int i = 4; i < 4 + 8; i++) {
-            //     var point = points[i];
-            //     point.z = MAX_RADIUS;
-            //     points.Add(point);
-            //     var uv = uvs[i];
-            //     uv.y = 0.75f;
-            //     uvs.Add(uv);
-            // }
-            //
-            // // Add the last face.
-            // for (int i = 0; i < 4; i++) {
-            //     var point = points[i];
-            //     point.z = MAX_RADIUS;
-            //     points.Add(point);
-            //     var uv = uvs[i];
-            //     uv.y = 1f - uv.y;
-            //     uvs.Add(uv);
-            // }
-            //
-            // // There are 4 faces, each face has 2 triangles and each triangle has
-            // // the indices of 3 vertices.
-            // var triangles = new [] {
-            //     // First face.
-            //     0, 1, 3,
-            //     1, 2, 3,
-            //     // Right side.
-            //     5, 4, 5 + FACE_SIZE,
-            //     4, 4 + FACE_SIZE, 5 + FACE_SIZE,
-            //     // Bottom side.
-            //     7, 6, 7 + FACE_SIZE,
-            //     6, 6 + FACE_SIZE, 7 + FACE_SIZE,
-            //     // Left side.
-            //     9, 8, 9 + FACE_SIZE,
-            //     8, 8 + FACE_SIZE, 9 + FACE_SIZE,
-            //     // Top side.
-            //     11, 10, 11 + FACE_SIZE,
-            //     10, 10 + FACE_SIZE, 11 + FACE_SIZE,
-            //     // Last face (flipped compared to the first face).
-            //     1 + LAST_FACE_OFFSET, 0 + LAST_FACE_OFFSET, 3 + LAST_FACE_OFFSET,
-            //     2 + LAST_FACE_OFFSET, 1 + LAST_FACE_OFFSET, 3 + LAST_FACE_OFFSET,
-            // };
-            //
-            // if (autoClampToMaxRadius) {
-            //     ClampToRadius(points, MAX_RADIUS);
-            // }
-            //
-            
+
+            for (int i = 0; i < points.Count; i++)
+            {
+                points[i] = points[i].RotateInDegreesAroundX(90);
+            }
             mesh.SetPoints(points.ToArray(), triangles);
             //
-            // mesh.Mesh.uv = uvs.ToArray();
+            
+            Debug.Log(points.ToArray().Length +", "+uvs.ToArray().Length);
+            mesh.Mesh.uv = uvs.ToArray();
+        }
+
+        private static void addRightConnectionsUvs(List<Vector2> uvs)
+        {
+            uvs.Add(new Vector2(.8f, .5f)); // CURa
+            uvs.Add(new Vector2(1, .5f)); // CURb
+            uvs.Add(new Vector2(.8f, .2f)); // CURc
+            uvs.Add(new Vector2(1, .2f)); // CURz
+
+            for (int i = 1; i < 15; i++) // uppers right
+            {
+                if (i % 2 == 0)
+                {
+                    uvs.Add(new Vector2(.8f, .5f)); //LIKE CURa
+                }
+                else // like CURB
+                {
+                    uvs.Add(new Vector2(1, .2f)); //LIKE CURb
+                }
+            }
+
+            uvs.Add(new Vector2(.8f, 0)); // CLRa
+            uvs.Add(new Vector2(1, 0)); // CLRb
+            uvs.Add(new Vector2(.8f, 0)); // CLRc
+            uvs.Add(new Vector2(1, 0)); // CLRz
+
+            for (int i = 1; i < 15; i++) // lowers right
+            {
+                if (i % 2 == 0)
+                {
+                    uvs.Add(new Vector2(.8f, 0)); //LIKE CLRa
+                }
+                else // like CURB
+                {
+                    uvs.Add(new Vector2(1, .2f)); //LIKE CLRb
+                }
+            }
+        }
+
+        private static void addDiscFaceUvs(List<Vector2> uvs)
+        {
+            uvs.Add(new Vector2(0, .3f)); //Z
+            uvs.Add(new Vector2(0, .7f)); //A
+            uvs.Add(new Vector2(.15f, 0.3f)); //B
+            uvs.Add(new Vector2(0, 0)); //C
+            uvs.Add(new Vector2(.15f, 0)); //R1
+
+            for (int i = 2; i < 15; i++) //R2-R14
+            {
+                if (i % 2 == 0) //like C
+                {
+                    uvs.Add(new Vector2(0, 0));
+                }
+                else // like R1
+                {
+                    uvs.Add(new Vector2(.15f, 0));
+                }
+            }
+
+            //L1-L14
+            uvs.Add(new Vector2(.15f, 0)); //L1
+            for (int i = 2; i < 15; i++) //L2-L14
+            {
+                if (i % 2 == 0) //like C
+                {
+                    uvs.Add(new Vector2(0, 0));
+                }
+                else // like L1
+                {
+                    uvs.Add(new Vector2(.15f, 0));
+                }
+            }
+
+            uvs.Add(new Vector2(.15f, 0.3f)); //E=B
         }
     }
 }

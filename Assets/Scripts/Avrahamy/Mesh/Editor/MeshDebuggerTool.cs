@@ -71,8 +71,16 @@ namespace Avrahamy.Meshes {
             var normals = new List<Vector3>();
             var uvs = new List<Vector2>();
             foreach (var i in indices) {
-                normals.Add(meshFilter.transform.TransformVector(mesh.normals[i]).normalized);
-                uvs.Add(mesh.uv[i]);
+                if (i < mesh.normals.Length) {
+                    normals.Add(meshFilter.transform.TransformVector(mesh.normals[i]).normalized);
+                } else {
+                    normals.Add(Vector3.zero);
+                }
+                if (i < mesh.uv.Length) {
+                    uvs.Add(mesh.uv[i]);
+                } else {
+                    uvs.Add(Vector2.zero);
+                }
             }
 
             Handles.color = Color.LerpUnclamped(Color.white, Color.red, 0.4f);
