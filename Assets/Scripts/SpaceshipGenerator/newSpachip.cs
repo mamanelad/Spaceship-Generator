@@ -9,7 +9,14 @@ namespace SpaceshipGenerator
 {
     [CreateAssetMenu(menuName = "Spaceship Generator/ELAD", fileName = "ELADSpaceshipGenerator")]
     public class newSpachip : SpaceshipGenerator
-    {
+    {   private float frontShipRand;
+        private float backShipRand;
+        private float sideShipRand;
+        private float circleVectorLenRand;
+        private float cockpitHeightRand;
+        private float shipDepthRand;
+        private float angleRand;
+
         public const float MIN_SIZE = 0.1f;
         private const int FACE_SIZE = 8;
         private const int LAST_FACE_OFFSET = 8 + 8 + 4;
@@ -34,99 +41,109 @@ namespace SpaceshipGenerator
                 sidesSizeRange.Max = Mathf.Max(sidesSizeRange.Max, MIN_SIZE);
             }
         }
+        private void RandomSizeMaker()
+        {
+            frontShipRand = Random.Range(0.3f, MAX_RADIUS);
+            backShipRand = Random.Range(0, MAX_RADIUS);
+            sideShipRand = Random.Range(0.2f, 0.6f);
+            circleVectorLenRand = Random.Range(0.6f, MAX_RADIUS);
+            cockpitHeightRand = Random.Range(0.1f, 0.5f);
+            shipDepthRand = Random.Range(0.05f, 0.4f);
+            angleRand = Random.Range(5, 10);
+        }
 
         public override void Generate(EditableMesh mesh)
         {
-            Vector3 Z = new Vector3(0, 0, 0);
-            Vector3 A = new Vector3(0, 1, 0);
-            Vector3 B = new Vector3(0.4f, 0, 0);
-            Vector3 C = new Vector3(0, -0.75f, 0);
-            Vector3 E = new Vector3(-0.4f, 0, 0);
+            RandomSizeMaker();
+            //Top vertex
+            var centerV = new Vector3(0, 0, 0);
+            var frontV = new Vector3(0, frontShipRand, 0);
+            var rightV = new Vector3(sideShipRand, 0, 0);
+            var backV = new Vector3(0, -backShipRand, 0);
+            var leftV = new Vector3(-sideShipRand, 0, 0);
+
+            //Cockpit vertex
+            var centerVUp = new Vector3(0, 0, -cockpitHeightRand);
+            var backVUp = new Vector3(0, -backShipRand, -cockpitHeightRand);
+            var rightVUp = new Vector3(sideShipRand, 0, -cockpitHeightRand);
+            var leftVUp = new Vector3(-sideShipRand, 0, -cockpitHeightRand);
+
+            //Bottom vertex
+            var centerVDown = new Vector3(0, 0, shipDepthRand);
+            var frontVDown = new Vector3(0, frontShipRand, shipDepthRand);
+            var rightVDown = new Vector3(sideShipRand, 0, shipDepthRand);
+            var backVDown = new Vector3(0, -backShipRand, shipDepthRand);
+            var leftVDown = new Vector3(-sideShipRand, 0, shipDepthRand);
+
+            //Top 
+            var circleMakeV = new Vector3(0, -circleVectorLenRand, 0);
+            Vector3 R1 = circleMakeV.RotateInDegreesAroundZ(angleRand);
+            Vector3 R2 = circleMakeV.RotateInDegreesAroundZ(2 * angleRand);
+            Vector3 R3 = circleMakeV.RotateInDegreesAroundZ(3 * angleRand);
+            Vector3 R4 = circleMakeV.RotateInDegreesAroundZ(4 * angleRand);
+            Vector3 R5 = circleMakeV.RotateInDegreesAroundZ(5 * angleRand);
+            Vector3 R6 = circleMakeV.RotateInDegreesAroundZ(6 * angleRand);
+            Vector3 R7 = circleMakeV.RotateInDegreesAroundZ(7 * angleRand);
+            Vector3 R8 = circleMakeV.RotateInDegreesAroundZ(8 * angleRand);
+            Vector3 R9 = circleMakeV.RotateInDegreesAroundZ(9 * angleRand);
+            Vector3 R10 = circleMakeV.RotateInDegreesAroundZ(10 * angleRand);
+            Vector3 R11 = circleMakeV.RotateInDegreesAroundZ(11 * angleRand);
+            Vector3 R12 = circleMakeV.RotateInDegreesAroundZ(12 * angleRand);
+            Vector3 R13 = circleMakeV.RotateInDegreesAroundZ(13 * angleRand);
+            Vector3 R14 = circleMakeV.RotateInDegreesAroundZ(14 * angleRand);
+
+            Vector3 L1 = circleMakeV.RotateInDegreesAroundZ(-1 * angleRand);
+            Vector3 L2 = circleMakeV.RotateInDegreesAroundZ(-2 * angleRand);
+            Vector3 L3 = circleMakeV.RotateInDegreesAroundZ(-3 * angleRand);
+            Vector3 L4 = circleMakeV.RotateInDegreesAroundZ(-4 * angleRand);
+            Vector3 L5 = circleMakeV.RotateInDegreesAroundZ(-5 * angleRand);
+            Vector3 L6 = circleMakeV.RotateInDegreesAroundZ(-6 * angleRand);
+            Vector3 L7 = circleMakeV.RotateInDegreesAroundZ(-7 * angleRand);
+            Vector3 L8 = circleMakeV.RotateInDegreesAroundZ(-8 * angleRand);
+            Vector3 L9 = circleMakeV.RotateInDegreesAroundZ(-9 * angleRand);
+            Vector3 L10 = circleMakeV.RotateInDegreesAroundZ(-10 * angleRand);
+            Vector3 L11 = circleMakeV.RotateInDegreesAroundZ(-11 * angleRand);
+            Vector3 L12 = circleMakeV.RotateInDegreesAroundZ(-12 * angleRand);
+            Vector3 L13 = circleMakeV.RotateInDegreesAroundZ(-13 * angleRand);
+            Vector3 L14 = circleMakeV.RotateInDegreesAroundZ(-14 * angleRand);
 
 
-            Vector3 ZU = new Vector3(0, 0, -0.3f);
-            Vector3 BU = new Vector3(0.4f, 0, -0.3f);
-            Vector3 CU = new Vector3(0, -0.75f, -0.3f);
-            Vector3 EU = new Vector3(-0.4f, 0, -0.3f);
+            circleMakeV.z += shipDepthRand;
+            Vector3 R1B = circleMakeV.RotateInDegreesAroundZ(1 * angleRand);
+            Vector3 R2B = circleMakeV.RotateInDegreesAroundZ(2 * angleRand);
+            Vector3 R3B = circleMakeV.RotateInDegreesAroundZ(3 * angleRand);
+            Vector3 R4B = circleMakeV.RotateInDegreesAroundZ(4 * angleRand);
+            Vector3 R5B = circleMakeV.RotateInDegreesAroundZ(5 * angleRand);
+            Vector3 R6B = circleMakeV.RotateInDegreesAroundZ(6 * angleRand);
+            Vector3 R7B = circleMakeV.RotateInDegreesAroundZ(7 * angleRand);
+            Vector3 R8B = circleMakeV.RotateInDegreesAroundZ(8 * angleRand);
+            Vector3 R9B = circleMakeV.RotateInDegreesAroundZ(9 * angleRand);
+            Vector3 R10B = circleMakeV.RotateInDegreesAroundZ(10 * angleRand);
+            Vector3 R11B = circleMakeV.RotateInDegreesAroundZ(11 * angleRand);
+            Vector3 R12B = circleMakeV.RotateInDegreesAroundZ(12 * angleRand);
+            Vector3 R13B = circleMakeV.RotateInDegreesAroundZ(13 * angleRand);
+            Vector3 R14B = circleMakeV.RotateInDegreesAroundZ(14 * angleRand);
 
-
-            Vector3 ZB = new Vector3(0, 0, 0.2f);
-            Vector3 AB = new Vector3(0, 1, 0.2f);
-            Vector3 BB = new Vector3(0.4f, 0, 0.2f);
-            Vector3 CB = new Vector3(0, -0.75f, 0.2f);
-            Vector3 EB = new Vector3(-0.4f, 0, 0.2f);
-
-
-            var temp0Vector3 = new Vector3(0, -0.85f, 0);
-            // var temp0Vector3 = new Vector3(0, -0.85f, 0);
-
-            Vector3 R1 = temp0Vector3.RotateInDegreesAroundZ(10);
-            Vector3 R2 = temp0Vector3.RotateInDegreesAroundZ(20);
-            Vector3 R3 = temp0Vector3.RotateInDegreesAroundZ(30);
-            Vector3 R4 = temp0Vector3.RotateInDegreesAroundZ(40);
-            Vector3 R5 = temp0Vector3.RotateInDegreesAroundZ(50);
-            Vector3 R6 = temp0Vector3.RotateInDegreesAroundZ(60);
-            Vector3 R7 = temp0Vector3.RotateInDegreesAroundZ(70);
-            Vector3 R8 = temp0Vector3.RotateInDegreesAroundZ(80);
-            Vector3 R9 = temp0Vector3.RotateInDegreesAroundZ(90);
-            Vector3 R10 = temp0Vector3.RotateInDegreesAroundZ(100);
-            Vector3 R11 = temp0Vector3.RotateInDegreesAroundZ(110);
-            Vector3 R12 = temp0Vector3.RotateInDegreesAroundZ(120);
-            Vector3 R13 = temp0Vector3.RotateInDegreesAroundZ(130);
-            Vector3 R14 = temp0Vector3.RotateInDegreesAroundZ(140);
-
-            Vector3 L1 = temp0Vector3.RotateInDegreesAroundZ(-10);
-            Vector3 L2 = temp0Vector3.RotateInDegreesAroundZ(-20);
-            Vector3 L3 = temp0Vector3.RotateInDegreesAroundZ(-30);
-            Vector3 L4 = temp0Vector3.RotateInDegreesAroundZ(-40);
-            Vector3 L5 = temp0Vector3.RotateInDegreesAroundZ(-50);
-            Vector3 L6 = temp0Vector3.RotateInDegreesAroundZ(-60);
-            Vector3 L7 = temp0Vector3.RotateInDegreesAroundZ(-70);
-            Vector3 L8 = temp0Vector3.RotateInDegreesAroundZ(-80);
-            Vector3 L9 = temp0Vector3.RotateInDegreesAroundZ(-90);
-            Vector3 L10 = temp0Vector3.RotateInDegreesAroundZ(-100);
-            Vector3 L11 = temp0Vector3.RotateInDegreesAroundZ(-110);
-            Vector3 L12 = temp0Vector3.RotateInDegreesAroundZ(-120);
-            Vector3 L13 = temp0Vector3.RotateInDegreesAroundZ(-130);
-            Vector3 L14 = temp0Vector3.RotateInDegreesAroundZ(-140);
-
-
-            temp0Vector3.z += 0.2f;
-            Vector3 R1B = temp0Vector3.RotateInDegreesAroundZ(10);
-            Vector3 R2B = temp0Vector3.RotateInDegreesAroundZ(20);
-            Vector3 R3B = temp0Vector3.RotateInDegreesAroundZ(30);
-            Vector3 R4B = temp0Vector3.RotateInDegreesAroundZ(40);
-            Vector3 R5B = temp0Vector3.RotateInDegreesAroundZ(50);
-            Vector3 R6B = temp0Vector3.RotateInDegreesAroundZ(60);
-            Vector3 R7B = temp0Vector3.RotateInDegreesAroundZ(70);
-            Vector3 R8B = temp0Vector3.RotateInDegreesAroundZ(80);
-            Vector3 R9B = temp0Vector3.RotateInDegreesAroundZ(90);
-            Vector3 R10B = temp0Vector3.RotateInDegreesAroundZ(100);
-            Vector3 R11B = temp0Vector3.RotateInDegreesAroundZ(110);
-            Vector3 R12B = temp0Vector3.RotateInDegreesAroundZ(120);
-            Vector3 R13B = temp0Vector3.RotateInDegreesAroundZ(130);
-            Vector3 R14B = temp0Vector3.RotateInDegreesAroundZ(140);
-
-            Vector3 L1B = temp0Vector3.RotateInDegreesAroundZ(-10);
-            Vector3 L2B = temp0Vector3.RotateInDegreesAroundZ(-20);
-            Vector3 L3B = temp0Vector3.RotateInDegreesAroundZ(-30);
-            Vector3 L4B = temp0Vector3.RotateInDegreesAroundZ(-40);
-            Vector3 L5B = temp0Vector3.RotateInDegreesAroundZ(-50);
-            Vector3 L6B = temp0Vector3.RotateInDegreesAroundZ(-60);
-            Vector3 L7B = temp0Vector3.RotateInDegreesAroundZ(-70);
-            Vector3 L8B = temp0Vector3.RotateInDegreesAroundZ(-80);
-            Vector3 L9B = temp0Vector3.RotateInDegreesAroundZ(-90);
-            Vector3 L10B = temp0Vector3.RotateInDegreesAroundZ(-100);
-            Vector3 L11B = temp0Vector3.RotateInDegreesAroundZ(-110);
-            Vector3 L12B = temp0Vector3.RotateInDegreesAroundZ(-120);
-            Vector3 L13B = temp0Vector3.RotateInDegreesAroundZ(-130);
-            Vector3 L14B = temp0Vector3.RotateInDegreesAroundZ(-140);
+            Vector3 L1B = circleMakeV.RotateInDegreesAroundZ(-1 * angleRand);
+            Vector3 L2B = circleMakeV.RotateInDegreesAroundZ(-2 * angleRand);
+            Vector3 L3B = circleMakeV.RotateInDegreesAroundZ(-3 * angleRand);
+            Vector3 L4B = circleMakeV.RotateInDegreesAroundZ(-4 * angleRand);
+            Vector3 L5B = circleMakeV.RotateInDegreesAroundZ(-5 * angleRand);
+            Vector3 L6B = circleMakeV.RotateInDegreesAroundZ(-6 * angleRand);
+            Vector3 L7B = circleMakeV.RotateInDegreesAroundZ(-7 * angleRand);
+            Vector3 L8B = circleMakeV.RotateInDegreesAroundZ(-8 * angleRand);
+            Vector3 L9B = circleMakeV.RotateInDegreesAroundZ(-9 * angleRand);
+            Vector3 L10B = circleMakeV.RotateInDegreesAroundZ(-10 * angleRand);
+            Vector3 L11B = circleMakeV.RotateInDegreesAroundZ(-11 * angleRand);
+            Vector3 L12B = circleMakeV.RotateInDegreesAroundZ(-12 * angleRand);
+            Vector3 L13B = circleMakeV.RotateInDegreesAroundZ(-13 * angleRand);
+            Vector3 L14B = circleMakeV.RotateInDegreesAroundZ(-14 * angleRand);
 
             //Connection Upper Right + "point name"
-            Vector3 CURz = Z;
-            Vector3 CURa = A;
-            Vector3 CURb = B;
-            Vector3 CURc = C;
+            Vector3 CURz = centerV;
+            Vector3 CURa = frontV;
+            Vector3 CURb = rightV;
+            Vector3 CURc = backV;
             Vector3 CUR1 = R1;
             Vector3 CUR2 = R2;
             Vector3 CUR3 = R3;
@@ -143,10 +160,10 @@ namespace SpaceshipGenerator
             Vector3 CUR14 = R14;
 
             //Connection Lower Right + "point name"
-            Vector3 CLRz = ZB;
-            Vector3 CLRa = AB;
-            Vector3 CLRb = BB;
-            Vector3 CLRc = CB;
+            Vector3 CLRz = centerVDown;
+            Vector3 CLRa = frontVDown;
+            Vector3 CLRb = rightVDown;
+            Vector3 CLRc = backVDown;
             Vector3 CLR1 = R1B;
             Vector3 CLR2 = R2B;
             Vector3 CLR3 = R3B;
@@ -163,11 +180,11 @@ namespace SpaceshipGenerator
             Vector3 CLR14 = R14B;
 
             //Connection Upper Left + "point name"
-            Vector3 CULz = Z;
-            Vector3 CULa = A;
-            Vector3 CULb = B;
-            Vector3 CULc = C;
-            Vector3 CULe = E;
+            Vector3 CULz = centerV;
+            Vector3 CULa = frontV;
+            Vector3 CULb = rightV;
+            Vector3 CULc = backV;
+            Vector3 CULe = leftV;
             Vector3 CUL1 = L1;
             Vector3 CUL2 = L2;
             Vector3 CUL3 = L3;
@@ -184,11 +201,11 @@ namespace SpaceshipGenerator
             Vector3 CUL14 = L14;
 
             //Connection Lower LEFT + "point name"
-            Vector3 CLLz = ZB;
-            Vector3 CLLa = AB;
-            Vector3 CLLb = BB;
-            Vector3 CLLc = CB;
-            Vector3 CLLe = EB;
+            Vector3 CLLz = centerVDown;
+            Vector3 CLLa = frontVDown;
+            Vector3 CLLb = rightVDown;
+            Vector3 CLLc = backVDown;
+            Vector3 CLLe = leftVDown;
             Vector3 CLL1 = L1B;
             Vector3 CLL2 = L2B;
             Vector3 CLL3 = L3B;
@@ -206,39 +223,28 @@ namespace SpaceshipGenerator
 
             var points = new List<Vector3>(100)
             {
-                Z, A, B, C,
+                centerV, frontV, rightV, backV,
                 //4
                 R1, R2, R3, R4, R5, R6, R7, R8, R9, R10, R11, R12, R13, R14,
                 //18
                 L1, L2, L3, L4, L5, L6, L7, L8, L9, L10, L11, L12, L13, L14,
                 //32
-                E,
+                leftV,
                 //33
-                ZB, AB, BB, CB,
+                centerVDown, frontVDown, rightVDown, backVDown,
                 //37
                 R1B, R2B, R3B, R4B, R5B, R6B, R7B, R8B, R9B, R10B, R11B, R12B, R13B, R14B,
                 //51
                 L1B, L2B, L3B, L4B, L5B, L6B, L7B, L8B, L9B, L10B, L11B, L12B, L13B, L14B,
                 //65
-                EB,
+                leftVDown,
 
                 //66
-                A, B, C, E,
+                frontV, rightV, backV, leftV,
                 //70
-                BU, CU, EU, ZU,
+                rightVUp, backVUp, leftVUp, centerVUp,
                 //74,75
-                BU, EU,
-
-
-                // //Cockpit
-                // 70, 2, 1, -BU B A ?
-                // 72, 1, 32, = EU A E ?
-                // 74, 1, 75, - BU' A EU'
-                //
-                // 68, 67, 70, - C' B' BU ?
-                // 68, 69, 72, - C' E' EU ?
-                // 68, 75, 74 - C',EU', BU'
-
+                rightVUp, leftVUp,
 
                 //Connections points upper right
                 //
@@ -255,20 +261,18 @@ namespace SpaceshipGenerator
 
                 //Connections points upper LEFT
                 //
-                CULa, CULb, CULc, CULz,
+                CULa, CULb, CULc, CULz, CULe,
                 //
                 CUL1, CUL2, CUL3, CUL4, CUL5, CUL6, CUL7, CUL8, CUL9, CUL10, CUL11, CUL12, CUL13, CUL14,
 
 
                 //Connections points lower LEFT
                 //
-                CLLa, CLLb, CLLc, CLLz, 
+                CLLa, CLLb, CLLc, CLLz, CLLe,
                 //
                 CLL1, CLL2, CLL3, CLL4, CLL5, CLL6, CLL7, CLL8, CLL9, CLL10, CLL11, CLL12, CLL13, CLL14
-                
-                , CULe,CLLe,
             };
-
+            
             var uvs = new List<Vector2>();
             addDiscFaceUvs(uvs); //add front face 0-32
             addDiscFaceUvs(uvs); //add back face 33- 65
@@ -493,7 +497,6 @@ namespace SpaceshipGenerator
             mesh.SetPoints(points.ToArray(), triangles);
             //
 
-            // Debug.Log(points.ToArray().Length +", "+uvs.ToArray().Length);
             mesh.Mesh.uv = uvs.ToArray();
         }
 
