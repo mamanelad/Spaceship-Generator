@@ -49,8 +49,6 @@ namespace SpaceshipGenerator
             Vector3 CU = new Vector3(0, -0.75f, -0.3f);
             Vector3 EU = new Vector3(-0.4f, 0, -0.3f);
 
-            
-            
 
             Vector3 ZB = new Vector3(0, 0, 0.2f);
             Vector3 AB = new Vector3(0, 1, 0.2f);
@@ -59,9 +57,9 @@ namespace SpaceshipGenerator
             Vector3 EB = new Vector3(-0.4f, 0, 0.2f);
 
 
-             var temp0Vector3 = new Vector3(0, -0.85f, 0);
+            var temp0Vector3 = new Vector3(0, -0.85f, 0);
             // var temp0Vector3 = new Vector3(0, -0.85f, 0);
-            
+
             Vector3 R1 = temp0Vector3.RotateInDegreesAroundZ(10);
             Vector3 R2 = temp0Vector3.RotateInDegreesAroundZ(20);
             Vector3 R3 = temp0Vector3.RotateInDegreesAroundZ(30);
@@ -76,7 +74,7 @@ namespace SpaceshipGenerator
             Vector3 R12 = temp0Vector3.RotateInDegreesAroundZ(120);
             Vector3 R13 = temp0Vector3.RotateInDegreesAroundZ(130);
             Vector3 R14 = temp0Vector3.RotateInDegreesAroundZ(140);
-            
+
             Vector3 L1 = temp0Vector3.RotateInDegreesAroundZ(-10);
             Vector3 L2 = temp0Vector3.RotateInDegreesAroundZ(-20);
             Vector3 L3 = temp0Vector3.RotateInDegreesAroundZ(-30);
@@ -108,7 +106,7 @@ namespace SpaceshipGenerator
             Vector3 R12B = temp0Vector3.RotateInDegreesAroundZ(120);
             Vector3 R13B = temp0Vector3.RotateInDegreesAroundZ(130);
             Vector3 R14B = temp0Vector3.RotateInDegreesAroundZ(140);
-            
+
             Vector3 L1B = temp0Vector3.RotateInDegreesAroundZ(-10);
             Vector3 L2B = temp0Vector3.RotateInDegreesAroundZ(-20);
             Vector3 L3B = temp0Vector3.RotateInDegreesAroundZ(-30);
@@ -123,7 +121,7 @@ namespace SpaceshipGenerator
             Vector3 L12B = temp0Vector3.RotateInDegreesAroundZ(-120);
             Vector3 L13B = temp0Vector3.RotateInDegreesAroundZ(-130);
             Vector3 L14B = temp0Vector3.RotateInDegreesAroundZ(-140);
-            
+
             //Connection Upper Right + "point name"
             Vector3 CURz = Z;
             Vector3 CURa = A;
@@ -205,7 +203,7 @@ namespace SpaceshipGenerator
             Vector3 CLL12 = L12B;
             Vector3 CLL13 = L13B;
             Vector3 CLL14 = L14B;
-            
+
             var points = new List<Vector3>(100)
             {
                 Z, A, B, C,
@@ -223,12 +221,25 @@ namespace SpaceshipGenerator
                 L1B, L2B, L3B, L4B, L5B, L6B, L7B, L8B, L9B, L10B, L11B, L12B, L13B, L14B,
                 //65
                 EB,
-                
+
                 //66
-                A,B,C,E,
+                A, B, C, E,
                 //70
-                BU,CU,EU,ZU,
-                
+                BU, CU, EU, ZU,
+                //74,75
+                BU, EU,
+
+
+                // //Cockpit
+                // 70, 2, 1, -BU B A ?
+                // 72, 1, 32, = EU A E ?
+                // 74, 1, 75, - BU' A EU'
+                //
+                // 68, 67, 70, - C' B' BU ?
+                // 68, 69, 72, - C' E' EU ?
+                // 68, 75, 74 - C',EU', BU'
+
+
                 //Connections points upper right
                 //
                 CURa, CURb, CURc, CURz,
@@ -244,129 +255,91 @@ namespace SpaceshipGenerator
 
                 //Connections points upper LEFT
                 //
-                CULa, CULb, CULc, CULz, CULe,
+                CULa, CULb, CULc, CULz,
                 //
                 CUL1, CUL2, CUL3, CUL4, CUL5, CUL6, CUL7, CUL8, CUL9, CUL10, CUL11, CUL12, CUL13, CUL14,
 
 
                 //Connections points lower LEFT
                 //
-                CLLa, CLLb, CLLc, CLLz, CLLe,
+                CLLa, CLLb, CLLc, CLLz, 
                 //
                 CLL1, CLL2, CLL3, CLL4, CLL5, CLL6, CLL7, CLL8, CLL9, CLL10, CLL11, CLL12, CLL13, CLL14
                 
-                
-
-                
+                , CULe,CLLe,
             };
 
             var uvs = new List<Vector2>();
             addDiscFaceUvs(uvs); //add front face 0-32
             addDiscFaceUvs(uvs); //add back face 33- 65
-            
-            
+
+
             //cockpit
-            //A-E 66-69
-            uvs.Add(new Vector2(.5f,1));//A
-            uvs.Add(new Vector2(.7f,1));//B
-            uvs.Add(new Vector2(.5f,0));//C
-            uvs.Add(new Vector2(.5f,0));//E
-            
-            //BU - ZU 70 - 73
-            uvs.Add(new Vector2(.7f,.5f));//BU
-            uvs.Add(new Vector2(.5f,.1f));//CU ??
-            uvs.Add(new Vector2(.5f,.5f));//EU
-            uvs.Add(new Vector2(.5f,0));//ZU ??
+            //A'-E' 66-69
+            uvs.Add(new Vector2(.5f, .5f)); //A' redundant ##
+            uvs.Add(new Vector2(0, .7f)); //B'
+            uvs.Add(new Vector2(0, 0.5f)); //C'
+            uvs.Add(new Vector2(0, 0.3f)); //E'
 
-            
-            //connections - right
-            addRightConnectionsUvs(uvs);
-            
-            //connections -left
-            uvs.Add(new Vector2(.8f, .2f)); // CURa
-            uvs.Add(new Vector2(1, .2f)); // CURb
-            uvs.Add(new Vector2(.8f, .2f)); // CURc
-            uvs.Add(new Vector2(1, .4f)); // CURz
-            uvs.Add(new Vector2(1, .5f)); // CURe
+            //BU - ZU 70 - 75
+            uvs.Add(new Vector2(.25f, .7f)); //BU
+            uvs.Add(new Vector2(0, .5f)); //CU redundant##
+            uvs.Add(new Vector2(.25f, .3f)); //EU
+            uvs.Add(new Vector2(.25f, 0.5f)); //ZU redundant ##
+            uvs.Add(new Vector2(.25f, .7f)); //BU'
+            uvs.Add(new Vector2(.25f, .3f)); //EU'
 
 
-            for (int i = 1; i < 15; i++) // uppers right
-            {
-                if (i % 2 == 0)
-                {
-                    uvs.Add(new Vector2(.8f, .2f)); //LIKE CURa
-                }
-                else // like CURB
-                {
-                    uvs.Add(new Vector2(1, .2f)); //LIKE CURb
-                }
-            }
-
-            uvs.Add(new Vector2(.8f, 0)); // CLRa
-            uvs.Add(new Vector2(1, 0)); // CLRb
-            uvs.Add(new Vector2(.8f, 0)); // CLRc
-            uvs.Add(new Vector2(1, 0)); // CLRz
-            uvs.Add(new Vector2(1, 0)); // CLRe
+            //connections 
+            addRightConnectionsUvs(uvs); //right
+            addRightConnectionsUvs(uvs); //left
+            uvs.Add(new Vector2(.75f, .15f)); // CULe
+            uvs.Add(new Vector2(.75f, 0)); // CLLe
 
 
-            for (int i = 1; i < 15; i++) // lowers right
-            {
-                if (i % 2 == 0)
-                {
-                    uvs.Add(new Vector2(.8f, .2f)); //LIKE CLRa
-                }
-                else // like CURB
-                {
-                    uvs.Add(new Vector2(1, .2f)); //LIKE CLRb
-                }
-            }
-            
 
 
             var triangles = new[]
             {
-  
-               
-                
-                 //up
-                 //kite-shape
-                 3, 1, 2,
-                 3, 32, 1,
-                 //right side
-                 4, 3, 2,
-                 5, 4, 2,
-                 6, 5, 2,
-                 7, 6, 2,
-                 8, 7, 2,
-                 9, 8, 2,
-                 10, 9, 2,
-                 11, 10, 2,
-                 12, 11, 2,
-                 13, 12, 2,
-                 14, 13, 2,
-                 15, 14, 2,
-                 16, 15, 2,
-                 17, 16, 2,
-                 //left side
-                 32, 3, 18,
-                 32, 18, 19,
-                 32, 19, 20,
-                 32, 20, 21,
-                 32, 21, 22,
-                 32, 22, 23,
-                 32, 23, 24,
-                 32, 24, 25,
-                 32, 25, 26,
-                 32, 26, 27,
-                 32, 27, 28,
-                 32, 28, 29,
-                 32, 29, 30,
-                 32, 30, 31,
-                 
+                //up
+                //kite-shape
+                3, 1, 2,
+                3, 32, 1,
+                //right side
+                4, 3, 2,
+                5, 4, 2,
+                6, 5, 2,
+                7, 6, 2,
+                8, 7, 2,
+                9, 8, 2,
+                10, 9, 2,
+                11, 10, 2,
+                12, 11, 2,
+                13, 12, 2,
+                14, 13, 2,
+                15, 14, 2,
+                16, 15, 2,
+                17, 16, 2,
+                //left side
+                32, 3, 18,
+                32, 18, 19,
+                32, 19, 20,
+                32, 20, 21,
+                32, 21, 22,
+                32, 22, 23,
+                32, 23, 24,
+                32, 24, 25,
+                32, 25, 26,
+                32, 26, 27,
+                32, 27, 28,
+                32, 28, 29,
+                32, 29, 30,
+                32, 30, 31,
+
 
                 // Down
                 //kite-shape
-                36, 35, 34, 
+                36, 35, 34,
                 36, 34, 65,
                 //  //left side
                 37, 35, 36,
@@ -383,9 +356,9 @@ namespace SpaceshipGenerator
                 48, 35, 47,
                 49, 35, 48,
                 50, 35, 49,
-                
+
                 //right side
-                51,36,65,
+                51, 36, 65,
                 52, 51, 65,
                 53, 52, 65,
                 54, 53, 65,
@@ -399,7 +372,7 @@ namespace SpaceshipGenerator
                 62, 61, 65,
                 63, 62, 65,
                 64, 63, 65,
-                
+
                 //connections
                 points.IndexOf(CURa), points.IndexOf(CLRa), points.IndexOf(CLRb),
                 points.IndexOf(CURa), points.IndexOf(CLRb), points.IndexOf(CURb),
@@ -449,7 +422,7 @@ namespace SpaceshipGenerator
                 points.IndexOf(CUR1), points.IndexOf(CLR1), points.IndexOf(CURc),
                 points.IndexOf(CLR1), points.IndexOf(CLRc), points.IndexOf(CURc),
 
-                 //left
+                //left
                 //321?
                 points.IndexOf(CULa), points.IndexOf(CLLa), points.IndexOf(CLLe),
                 points.IndexOf(CULa), points.IndexOf(CLLe), points.IndexOf(CULe),
@@ -498,116 +471,115 @@ namespace SpaceshipGenerator
 
                 points.IndexOf(CUL1), points.IndexOf(CLL1), points.IndexOf(CULc),
                 points.IndexOf(CLL1), points.IndexOf(CLLc), points.IndexOf(CULc),
-                
+
                 //Cockpit
-                
-                70,2,1,
-                72,66,69,
+                70, 2, 1,
+                72, 1, 32,
+                74, 1, 75,
 
-                
-                70,67,66,
-                72,66,69,
-                
-                
-                70,66,72,
-                68,67,70,
-                68,69,72,
-                68,72,70,
-                
-
+                68, 67, 70,
+                68, 69, 72,
+                68, 75, 74
             };
 
             FlipTriangles(triangles, 276, triangles.Length - 7);
 
-            
-            
-            
-            
-            
 
             for (int i = 0; i < points.Count; i++)
             {
                 points[i] = points[i].RotateInDegreesAroundX(90);
             }
+
             mesh.SetPoints(points.ToArray(), triangles);
             //
-            
-            Debug.Log(points.ToArray().Length +", "+uvs.ToArray().Length);
+
+            // Debug.Log(points.ToArray().Length +", "+uvs.ToArray().Length);
             mesh.Mesh.uv = uvs.ToArray();
         }
 
         private static void addRightConnectionsUvs(List<Vector2> uvs)
         {
-            uvs.Add(new Vector2(.8f, .5f)); // CURa
-            uvs.Add(new Vector2(1, .5f)); // CURb
-            uvs.Add(new Vector2(.8f, .2f)); // CURc
-            uvs.Add(new Vector2(1, .2f)); // CURz
+            uvs.Add(new Vector2(1f, .15f)); // CURa
+            uvs.Add(new Vector2(.75f, .15f)); // CURb
+            uvs.Add(new Vector2(1f, 0f)); // CURc 
+            uvs.Add(new Vector2(1f, .15f)); // CURz redundant ##
 
-            for (int i = 1; i < 15; i++) // uppers right
+            for (int i = 1; i < 15; i++) // CUR1-CUR14
             {
-                if (i % 2 == 0)
+                if (i % 3 == 0)
                 {
-                    uvs.Add(new Vector2(.8f, .5f)); //LIKE CURa
+                    uvs.Add(new Vector2(1f, 0f)); // Like CLRa
                 }
-                else // like CURB
+
+                if (i % 3 == 1)
                 {
-                    uvs.Add(new Vector2(1, .2f)); //LIKE CURb
+                    uvs.Add(new Vector2(.75f, .0f)); //LIKE CLRb
+                }
+
+                if (i % 3 == 2)
+                {
+                    uvs.Add(new Vector2(1f, .15f)); // Like CURa
                 }
             }
 
-            uvs.Add(new Vector2(.8f, 0)); // CLRa
-            uvs.Add(new Vector2(1, 0)); // CLRb
-            uvs.Add(new Vector2(.8f, 0)); // CLRc
-            uvs.Add(new Vector2(1, 0)); // CLRz
+            uvs.Add(new Vector2(1f, 0f)); // CLRa 
+            uvs.Add(new Vector2(.75f, .0f)); //CLRb
+            uvs.Add(new Vector2(.75f, .0f)); // CLRc
+            uvs.Add(new Vector2(1f, .15f)); // CLRz redundant ##
 
-            for (int i = 1; i < 15; i++) // lowers right
+            for (int i = 1; i < 15; i++) // CLR1-CLR14
             {
-                if (i % 2 == 0)
+                if (i % 3 == 0)
                 {
-                    uvs.Add(new Vector2(.8f, 0)); //LIKE CLRa
+                    uvs.Add(new Vector2(.75f, .0f));
                 }
-                else // like CURB
+
+                if (i % 3 == 1)
                 {
-                    uvs.Add(new Vector2(1, .2f)); //LIKE CLRb
+                    uvs.Add(new Vector2(1f, .15f));
+                }
+
+                if (i % 3 == 2)
+                {
+                    uvs.Add(new Vector2(1f, 0f)); // Clr14 like Cur12
                 }
             }
         }
 
         private static void addDiscFaceUvs(List<Vector2> uvs)
         {
-            uvs.Add(new Vector2(0, .3f)); //Z
-            uvs.Add(new Vector2(0, .7f)); //A
-            uvs.Add(new Vector2(.15f, 0.3f)); //B
-            uvs.Add(new Vector2(0, 0)); //C
-            uvs.Add(new Vector2(.15f, 0)); //R1
+            uvs.Add(new Vector2(0.25f, .5f)); //Z
+            uvs.Add(new Vector2(.5f, .5f)); //A
+            uvs.Add(new Vector2(.75f, 0.7f)); //B
+            uvs.Add(new Vector2(1, .5f)); //C
 
-            for (int i = 2; i < 15; i++) //R2-R14
+            //R1-R14
+            for (int i = 1; i < 15; i++)
             {
                 if (i % 2 == 0) //like C
                 {
-                    uvs.Add(new Vector2(0, 0));
+                    uvs.Add(new Vector2(1, .5f));
                 }
-                else // like R1
+                else // like A
                 {
-                    uvs.Add(new Vector2(.15f, 0));
+                    uvs.Add(new Vector2(.5f, .5f));
                 }
             }
 
             //L1-L14
-            uvs.Add(new Vector2(.15f, 0)); //L1
-            for (int i = 2; i < 15; i++) //L2-L14
+            for (int i = 1; i < 15; i++)
             {
                 if (i % 2 == 0) //like C
                 {
-                    uvs.Add(new Vector2(0, 0));
+                    uvs.Add(new Vector2(1, .5f));
                 }
-                else // like L1
+                else // like A
                 {
-                    uvs.Add(new Vector2(.15f, 0));
+                    uvs.Add(new Vector2(.5f, .5f));
                 }
             }
 
-            uvs.Add(new Vector2(.15f, 0.3f)); //E=B
+            uvs.Add(new Vector2(.75f, 0.3f)); //E=B
         }
     }
 }
