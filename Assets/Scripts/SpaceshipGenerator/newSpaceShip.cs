@@ -8,9 +8,8 @@ using UnityEngine.UIElements;
 namespace SpaceshipGenerator
 {
     [CreateAssetMenu(menuName = "Spaceship Generator/ELAD", fileName = "ELADSpaceshipGenerator")]
-    public class newSpachip : SpaceshipGenerator
-    {
-        private float frontShipRand;
+    public class newSpaceShip : SpaceshipGenerator
+    {   private float frontShipRand;
         private float backShipRand;
         private float sideShipRand;
         private float circleVectorLenRand;
@@ -42,7 +41,6 @@ namespace SpaceshipGenerator
                 sidesSizeRange.Max = Mathf.Max(sidesSizeRange.Max, MIN_SIZE);
             }
         }
-
         private void RandomSizeMaker()
         {
             frontShipRand = Random.Range(0.3f, MAX_RADIUS);
@@ -274,6 +272,18 @@ namespace SpaceshipGenerator
                 //
                 CLL1, CLL2, CLL3, CLL4, CLL5, CLL6, CLL7, CLL8, CLL9, CLL10, CLL11, CLL12, CLL13, CLL14
             };
+            
+            var uvs = new List<Vector2>();
+            addDiscFaceUvs(uvs); //add front face 0-32
+            addDiscFaceUvs(uvs); //add back face 33- 65
+            createCockpitUvs(uvs);
+            //connections 
+            addRightConnectionsUvs(uvs); //right
+            addRightConnectionsUvs(uvs); //left
+            uvs.Add(new Vector2(.75f, .15f)); // CULe
+            uvs.Add(new Vector2(.75f, 0)); // CLLe
+
+
 
 
             var triangles = new[]
@@ -282,7 +292,6 @@ namespace SpaceshipGenerator
                 //kite-shape
                 3, 1, 2,
                 3, 32, 1,
-                
                 //right side
                 4, 3, 2,
                 5, 4, 2,
@@ -298,7 +307,6 @@ namespace SpaceshipGenerator
                 15, 14, 2,
                 16, 15, 2,
                 17, 16, 2,
-                
                 //left side
                 32, 3, 18,
                 32, 18, 19,
@@ -320,8 +328,7 @@ namespace SpaceshipGenerator
                 //kite-shape
                 36, 35, 34,
                 36, 34, 65,
-                
-                //left side
+                //  //left side
                 37, 35, 36,
                 38, 35, 37,
                 39, 35, 38,
@@ -403,6 +410,7 @@ namespace SpaceshipGenerator
                 points.IndexOf(CLR1), points.IndexOf(CLRc), points.IndexOf(CURc),
 
                 //left
+                //321?
                 points.IndexOf(CULa), points.IndexOf(CLLa), points.IndexOf(CLLe),
                 points.IndexOf(CULa), points.IndexOf(CLLe), points.IndexOf(CULe),
 
@@ -462,13 +470,119 @@ namespace SpaceshipGenerator
             };
 
             FlipTriangles(triangles, 276, triangles.Length - 7);
-
+            
             for (int i = 0; i < points.Count; i++)
             {
                 points[i] = points[i].RotateInDegreesAroundX(90);
             }
 
             mesh.SetPoints(points.ToArray(), triangles);
+            
+
+            mesh.Mesh.uv = uvs.ToArray();
+        }
+
+        private static void createCockpitUvs(List<Vector2> uvs)
+        {
+            //cockpit
+            //A'-E' 66-69
+            uvs.Add(new Vector2(.5f, .5f)); //A' 
+            uvs.Add(new Vector2(0, .7f)); //B'
+            uvs.Add(new Vector2(0, 0.5f)); //C'
+            uvs.Add(new Vector2(0, 0.3f)); //E'
+
+            //BU - ZU 70 - 75
+            uvs.Add(new Vector2(.25f, .7f)); //BU
+            uvs.Add(new Vector2(0, .5f)); //CU 
+            uvs.Add(new Vector2(.25f, .3f)); //EU
+            uvs.Add(new Vector2(.25f, 0.5f)); //ZU 
+            uvs.Add(new Vector2(.25f, .7f)); //BU'
+            uvs.Add(new Vector2(.25f, .3f)); //EU'
+        }
+
+        private static void addRightConnectionsUvs(List<Vector2> uvs)
+        {
+            uvs.Add(new Vector2(1f, .15f)); // CURa
+            uvs.Add(new Vector2(.75f, .15f)); // CURb
+            uvs.Add(new Vector2(1f, 0f)); // CURc 
+            uvs.Add(new Vector2(1f, .15f)); // CURz 
+
+            for (int i = 1; i < 15; i++) // CUR1-CUR14
+            {
+                if (i % 3 == 0)
+                {
+                    uvs.Add(new Vector2(1f, 0f)); // Like CLRa
+                }
+
+                if (i % 3 == 1)
+                {
+                    uvs.Add(new Vector2(.75f, .0f)); //LIKE CLRb
+                }
+
+                if (i % 3 == 2)
+                {
+                    uvs.Add(new Vector2(1f, .15f)); // Like CURa
+                }
+            }
+
+            uvs.Add(new Vector2(1f, 0f)); // CLRa 
+            uvs.Add(new Vector2(.75f, .0f)); //CLRb
+            uvs.Add(new Vector2(.75f, .0f)); // CLRc
+            uvs.Add(new Vector2(1f, .15f)); // CLRz redundant ##
+
+            for (int i = 1; i < 15; i++) // CLR1-CLR14
+            {
+                if (i % 3 == 0)
+                {
+                    uvs.Add(new Vector2(.75f, .0f));
+                }
+
+                if (i % 3 == 1)
+                {
+                    uvs.Add(new Vector2(1f, .15f));
+                }
+
+                if (i % 3 == 2)
+                {
+                    uvs.Add(new Vector2(1f, 0f)); // Clr14 like Cur12
+                }
+            }
+        }
+
+        private static void addDiscFaceUvs(List<Vector2> uvs)
+        {
+            uvs.Add(new Vector2(0.25f, .5f)); //Z
+            uvs.Add(new Vector2(.5f, .5f)); //A
+            uvs.Add(new Vector2(.75f, 0.7f)); //B
+            uvs.Add(new Vector2(1, .5f)); //C
+
+            //R1-R14
+            for (int i = 1; i < 15; i++)
+            {
+                if (i % 2 == 0) //like C
+                {
+                    uvs.Add(new Vector2(1, .5f));
+                }
+                else // like A
+                {
+                    uvs.Add(new Vector2(.5f, .5f));
+                }
+            }
+
+            //L1-L14
+            for (int i = 1; i < 15; i++)
+            {
+                if (i % 2 == 0) //like C
+                {
+                    uvs.Add(new Vector2(1, .5f));
+                }
+                else // like A
+                {
+                    uvs.Add(new Vector2(.5f, .5f));
+                }
+            }
+
+            uvs.Add(new Vector2(.75f, 0.3f)); //E=B
         }
     }
 }
