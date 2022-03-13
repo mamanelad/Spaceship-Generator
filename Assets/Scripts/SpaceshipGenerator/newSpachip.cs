@@ -276,24 +276,7 @@ namespace SpaceshipGenerator
             var uvs = new List<Vector2>();
             addDiscFaceUvs(uvs); //add front face 0-32
             addDiscFaceUvs(uvs); //add back face 33- 65
-
-
-            //cockpit
-            //A'-E' 66-69
-            uvs.Add(new Vector2(.5f, .5f)); //A' redundant ##
-            uvs.Add(new Vector2(0, .7f)); //B'
-            uvs.Add(new Vector2(0, 0.5f)); //C'
-            uvs.Add(new Vector2(0, 0.3f)); //E'
-
-            //BU - ZU 70 - 75
-            uvs.Add(new Vector2(.25f, .7f)); //BU
-            uvs.Add(new Vector2(0, .5f)); //CU redundant##
-            uvs.Add(new Vector2(.25f, .3f)); //EU
-            uvs.Add(new Vector2(.25f, 0.5f)); //ZU redundant ##
-            uvs.Add(new Vector2(.25f, .7f)); //BU'
-            uvs.Add(new Vector2(.25f, .3f)); //EU'
-
-
+            createCockpitUvs(uvs);
             //connections 
             addRightConnectionsUvs(uvs); //right
             addRightConnectionsUvs(uvs); //left
@@ -487,17 +470,34 @@ namespace SpaceshipGenerator
             };
 
             FlipTriangles(triangles, 276, triangles.Length - 7);
-
-
+            
             for (int i = 0; i < points.Count; i++)
             {
                 points[i] = points[i].RotateInDegreesAroundX(90);
             }
 
             mesh.SetPoints(points.ToArray(), triangles);
-            //
+            
 
             mesh.Mesh.uv = uvs.ToArray();
+        }
+
+        private static void createCockpitUvs(List<Vector2> uvs)
+        {
+            //cockpit
+            //A'-E' 66-69
+            uvs.Add(new Vector2(.5f, .5f)); //A' 
+            uvs.Add(new Vector2(0, .7f)); //B'
+            uvs.Add(new Vector2(0, 0.5f)); //C'
+            uvs.Add(new Vector2(0, 0.3f)); //E'
+
+            //BU - ZU 70 - 75
+            uvs.Add(new Vector2(.25f, .7f)); //BU
+            uvs.Add(new Vector2(0, .5f)); //CU 
+            uvs.Add(new Vector2(.25f, .3f)); //EU
+            uvs.Add(new Vector2(.25f, 0.5f)); //ZU 
+            uvs.Add(new Vector2(.25f, .7f)); //BU'
+            uvs.Add(new Vector2(.25f, .3f)); //EU'
         }
 
         private static void addRightConnectionsUvs(List<Vector2> uvs)
@@ -505,7 +505,7 @@ namespace SpaceshipGenerator
             uvs.Add(new Vector2(1f, .15f)); // CURa
             uvs.Add(new Vector2(.75f, .15f)); // CURb
             uvs.Add(new Vector2(1f, 0f)); // CURc 
-            uvs.Add(new Vector2(1f, .15f)); // CURz redundant ##
+            uvs.Add(new Vector2(1f, .15f)); // CURz 
 
             for (int i = 1; i < 15; i++) // CUR1-CUR14
             {
