@@ -14,35 +14,36 @@
 ## Table Of Content
 
 - [General](#general)
-- [Installation](#installation)
-- [How To Play](#howtoplay)
 - [Screenshots](#screenshots)
-- [Credits](#credits)  
 
 ## General
 
-The game was created as part of "Game Development Foundations course" by [NotSlot](https://github.com/notslot) within my Computer Science B.Sc.  
-The original assignment was to recreate an 1980s video game.  
-I personally choose Metroid as i truly belive that this game had a major influence on video games devolopment.  
-  
-**I strongly suggest to check the light mod that I created following this project - [MetroidLightMod](https://github.com/ArnonGuttel/MetroidLightMod)** 
+Advanced Game Development
+Exercise 1
+Tal Brauner and Elad maman 
 
-## Installation
+Design inspiration: 
+Our design inspiration was taken from the design of tree star wars ships : 
+1. An old Rebuplic ship - The "Tranperent". 
+https://www.pngitem.com/middle/hwwmwhm_starwars-ship-png-old-republic-ships-star-wars/
+2. The "Millennium Falcon" 
+https://www.sideshow.com/collectibles/star-wars-millennium-falcon-rise-of-skywalker-version-bandai-905905
+3. The "x wing starfighter". 
+https://cdn-3d.niceshops.com/upload/image/product/large/default/revell-x-wing-fighter-1-pc-312103-en.jpg
 
-- Windows:      
-  - &emsp; Download the [WindowsBuild](https://github.com/ArnonGuttel/MetroidRemake/tree/main/WindowsBuild) folder 
-  - &emsp; Run the Metroid Game.exe executable file.
+Design Steps: 
+1. The body - Each face of the ship's body is a kite shape, and was inspired by the  "Tranperent" and the "x wing starfighter".
+2. The wings - Each wing is a part of a half circle and was inspired by the "Millennium Falcon". 
+3. The cockpit - The cockpit was inspired by the  "x wing starfighter" and from the modern Fighter aircraft - like a kite shape with enough width and length for one or two persons to set in.  
  
- - Mac
-   - &emsp; Download the [MacBuild](https://github.com/ArnonGuttel/MetroidRemake/tree/main/MacBuild.app/Contents) folder 
-   - &emsp; Run the  Mac Build.app_ package
+Random Details:
+1. The body size - front, back, and sizes length. 
+2. The wings - radius length and max angle were the part circle ends.
+3. The ship height - cockpit height and the length between the body and wings upper face and bottom face. 
 
-## How&nbsp;To&nbsp;Play
-- Arrow key's to move
-- Down arrow key to start/stop roll (once roll powerup taken)
-- 's' key to fire
-- 'esc' key to pause 
-
+What would we improve given more time?
+we would improve our mash by adding more details like a hole for the window, a container for the gas tank, wheels for landing, an antenna for receiving and transmitting data, missile launcher.
+  
 ## Screenshots
 
   <h3>Gameplay:</h3>
@@ -62,8 +63,3 @@ I personally choose Metroid as i truly belive that this game had a major influen
  <p align="center"> 
   <img src="Images/GameOverMenu.jpeg" width="400"/>
  </p>
-
-## Credits 
-- Banner Logo - [DivineArt](https://www.deviantart.com/imleerobson/art/Metroid-Title-Screen-Vector-Logo-1987-703268172)
-- Sprites - [Spriters-Resource](https://www.spriters-resource.com/nes/metroid/)
-- Sound Effects - [Sounds-Resource](https://www.sounds-resource.com/nes/metroid/sound/4866/)
