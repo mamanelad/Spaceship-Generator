@@ -1,17 +1,5 @@
 # Spaceship-Generator
-
-<h1 align="center">
-  <img src="Images/MetroidBanner.png"/>
-  
- ![_alt text_](https://img.shields.io/badge/Platforms-windows_|_macos-blue??style=for-the-badge)
-
-  </h1>
-<h3 align="center">  
-  ![WhatsApp Image 2022-08-22 at 2 05 12 PM](https://user-images.githubusercontent.com/80784911/185906947-47a18b1d-3aa9-4393-ae1c-c68c0cd856e0.jpeg)
-
-  A remake of Nintendo`s masterpice origin Metroid using Unity & C#
-  </h3>
-  
+ 
 ## Table Of Content
 
 - [General](#general)
