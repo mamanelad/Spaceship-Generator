@@ -37,7 +37,7 @@ we would improve our mash by adding more details like a hole for the window, a c
 
   <h3>Gameplay:</h3>
 <p align="center">
- <img src="Images/Gameplay1.jpeg" width="400"/>
+ <img src="Images/Screenshot 2022-08-23 185026.png" width="400"/>
  <img src="Images/Gameplay3.jpeg" width="400"/>
  <img src="Images/Gameplay4.jpeg" width="400"/>
  <img src="Images/Gameplay5.jpeg" width="400"/>
