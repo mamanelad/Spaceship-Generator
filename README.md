@@ -3,7 +3,7 @@
 ## Table Of Content
 
 - [General](#general)
-- [Screenshots](#screenshots)
+- [Photos](#Photos)
 
 ## General
 
@@ -33,7 +33,7 @@ Random Details:
 What would we improve given more time?
 we would improve our mash by adding more details like a hole for the window, a container for the gas tank, wheels for landing, an antenna for receiving and transmitting data, missile launcher.
   
-## Screenshots
+## Photos
 
   <h3>Gameplay:</h3>
 <p align="center">
